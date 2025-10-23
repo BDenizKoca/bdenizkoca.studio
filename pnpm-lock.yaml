@@ -23,6 +23,9 @@ importers:
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
+      workbox-window:
+        specifier: ^7.3.0
+        version: 7.3.0
     devDependencies:
       '@vite-pwa/astro':
         specifier: ^1.1.1
