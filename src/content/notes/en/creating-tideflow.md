@@ -6,8 +6,6 @@ lang: en
 show_on_homepage: true
 ---
 
-## Why markdown at all?
-
 This all started 4-5 years back when I first started noticing more and more markdowns files popping up in my workflow. I was and still am a naturally very curious person. Which was why I was busy with academia, learning latin, learning coding and bunchmore things that would require me to write some things down. Skip forward 1-2 years and I found myself defaulting to this workflow.
 
 -Write down whatever you want to write without format, as plain text

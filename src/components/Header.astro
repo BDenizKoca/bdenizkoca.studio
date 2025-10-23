@@ -9,7 +9,7 @@ interface Props {
 
 const { lang = 'en', currentPath = '/', altLangUrl } = Astro.props;
 const navItems = siteConfig.nav[lang] || [];
-const isHome = currentPath === '/' || currentPath === '/tr/' || currentPath.startsWith('/notes') || currentPath.startsWith('/tr/notlar');
+const isHome = currentPath === '/' || currentPath === '/tr/';
 const homeHref = isHome ? '#top' : (lang === 'tr' ? '/tr/' : '/');
 
 // Define language-specific URLs

@@ -41,7 +41,7 @@ const altLangUrl = cleanAltSlug ? `/tr/notlar/${cleanAltSlug}/` : undefined;
   <Header slot="header" lang="en" currentPath={Astro.url.pathname} altLangUrl={altLangUrl} />
   
   <article class="note-article container">
-    <header class="note-header">
+    <header class="article-hero">
       <h1>{note.data.title}</h1>
       <time datetime={note.data.date.toISOString()}>
         {formatDate(note.data.date)}
