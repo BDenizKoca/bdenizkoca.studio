@@ -6,7 +6,7 @@ _site/
 /tideflow/
 
 # Deleted directories (if recreated by mistake)
-scripts/
+/scripts/
 src/content/
 
 # OS files
