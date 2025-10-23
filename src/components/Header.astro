@@ -1,0 +1,47 @@
+---
+import { siteConfig } from '../config/site';
+
+interface Props {
+  lang?: 'en' | 'tr';
+  currentPath?: string;
+  altLangUrl?: string;
+}
+
+const { lang = 'en', currentPath = '/', altLangUrl } = Astro.props;
+const navItems = siteConfig.nav[lang] || [];
+const isHome = currentPath === '/' || currentPath === '/tr/';
+const homeHref = isHome ? '#top' : (lang === 'tr' ? '/tr/' : '/');
+
+// Define language-specific URLs
+const enHref = lang === 'en' ? currentPath : altLangUrl || '/';
+const trHref = lang === 'tr' ? currentPath : altLangUrl || '/tr/';
+---
+
+<header class={`site-header${!isHome ? ' is-visible' : ''}`} data-component="sticky-header">
+  <div class="container header-inner">
+    <a class="site-title" href={homeHref}>
+      <span class="site-title__compact" aria-hidden="true">D</span>
+      <span class="site-title__full">Deniz Koca</span>
+    </a>
+    <nav class="site-navigation" aria-label="Primary">
+      <ul>
+        {navItems.map(item => {
+          const href = isHome && item.anchor ? item.anchor : item.path;
+          const isActive = !isHome && (currentPath === item.path || currentPath.startsWith(item.path));
+          return (
+            <li>
+              <a href={href} aria-current={isActive ? 'page' : undefined}>
+                {item.label}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+    <nav class="language-toggle" aria-label="Language selection">
+      <a href={enHref} aria-current={lang === 'en' ? 'page' : undefined} hreflang="en" aria-label="Switch to English">EN</a>
+      <span aria-hidden="true">|</span>
+      <a href={trHref} aria-current={lang === 'tr' ? 'page' : undefined} hreflang="tr" aria-label="Switch to Turkish">TR</a>
+    </nav>
+  </div>
+</header>

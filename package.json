@@ -1,0 +1,27 @@
+{
+  "name": "personalsite",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "build:check": "astro check && astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "astro": "astro"
+  },
+  "keywords": [],
+  "author": "Deniz Koca",
+  "license": "MIT",
+  "description": "Personal website for Deniz Koca built with Astro.",
+  "dependencies": {
+    "@astrojs/check": "^0.9.5",
+    "@astrojs/mdx": "^4.3.7",
+    "@astrojs/sitemap": "^3.6.0",
+    "astro": "^5.14.8",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@vite-pwa/astro": "^1.1.1"
+  }
+}

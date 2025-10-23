@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+
+const projects = await getCollection('projects', ({ data }) => data.lang === 'tr');
+
+// Sort projects by date (newest first)
+projects.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout
+  title="Projeler — Deniz Koca"
+  description="Geliştirdiğim proje ve araçlar."
+  lang="tr"
+  bodyClass="page-projects"
+>
+  <Header slot="header" lang="tr" currentPath="/tr/projeler/" altLangUrl="/projects/" />
+
+  <div class="page-heading page-heading--standalone container">
+    <h1>Projeler</h1>
+    <p class="page-intro">Geliştirdiğim proje ve araçlar.</p>
+  </div>
+
+  <section class="collection-section container">
+    <div class="collection-grid collection-grid--projects">
+      {projects.map((project) => (
+        <article class="project-card project-card--collection">
+          <a href={`/tr/projeler/${project.slug}/`} class="project-card__media">
+            <img src={project.data.cover_image} alt={project.data.title} loading="lazy" decoding="async" />
+          </a>
+          <div class="project-card__body">
+            <h2><a href={`/tr/projeler/${project.slug}/`}>{project.data.title}</a></h2>
+            <p>{project.data.description}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <Footer slot="footer" lang="tr" />
+</BaseLayout>

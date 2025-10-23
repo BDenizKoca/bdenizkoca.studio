@@ -1,0 +1,44 @@
+# Dependencies
+node_modules/
+
+# Build output
+_site/
+/tideflow/
+
+# Deleted directories (if recreated by mistake)
+scripts/
+src/content/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Optional: Generated content files (if you want to keep them in version control, remove these lines)
+# src/projects/*.md
+# !src/projects/projects.11tydata.js
+# !src/projects/index.njk
+# src/notes/*.md
+# !src/notes/notes.11tydata.js
+# !src/notes/index.njk
+# src/tr/projects/*.md
+# !src/tr/projects/index.njk
+# src/tr/notes/*.md
+# !src/tr/notes/index.njk

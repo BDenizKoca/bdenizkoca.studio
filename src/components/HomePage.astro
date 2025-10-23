@@ -1,0 +1,74 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { Language } from '../utils';
+import { getCopyBundle, getLocalePaths, formatDate } from '../utils';
+
+interface Props {
+  lang: Language;
+  featuredProject: CollectionEntry<'projects'> | null;
+  featuredNote: CollectionEntry<'notes'> | null;
+}
+
+const { lang, featuredProject, featuredNote } = Astro.props;
+const copyBundle = getCopyBundle(lang);
+const paths = getLocalePaths(lang);
+---
+
+<section id="top" class="intro-section container">
+  <h1 class="intro-lede intro-lede--headline" set:html={copyBundle.introHeading} />
+  <p class="intro-lede intro-lede--body" set:html={copyBundle.introBody} />
+</section>
+
+<section id="projects" class="projects-section projects-section--stacked">
+  <div class="container">
+    <div class="section-heading">
+      <h2>{copyBundle.projectsHeading}</h2>
+    </div>
+  </div>
+  <div class="projects-grid projects-grid--stacked">
+    {featuredProject && (
+      <div class="featured-project-wrapper">
+        <article class="project-card project-card--featured featured-project-card">
+          <a href={paths.projectsSlug(featuredProject.slug)} class="project-card__media" aria-label={featuredProject.data.title}>
+            <img src={featuredProject.data.cover_image} alt={`${featuredProject.data.title} thumbnail`} class="default-image" loading="eager" decoding="async" />
+            {featuredProject.data.hover_video && (
+              <video src={featuredProject.data.hover_video} class="hover-video" autoplay loop muted playsinline></video>
+            )}
+          </a>
+          <div class="project-card__body">
+            <h3><a href={paths.projectsSlug(featuredProject.slug)}>{featuredProject.data.title}</a></h3>
+            <p>{featuredProject.data.description}</p>
+          </div>
+        </article>
+      </div>
+    )}
+  </div>
+</section>
+
+<section id="notes" class="notes-section container">
+  <div class="section-heading">
+    <h2>{copyBundle.notesHeading}</h2>
+  </div>
+  <div class="notes-ledger notes-ledger--home">
+    {featuredNote && (
+      <article class="note-item note-item--ledger">
+        <h3><a href={paths.notesSlug(featuredNote.slug)}>{featuredNote.data.title}</a></h3>
+        <time datetime={featuredNote.data.date.toISOString()}>
+          {formatDate(featuredNote.data.date, lang)}
+        </time>
+      </article>
+    )}
+  </div>
+</section>
+
+<section id="about" class="about-section container">
+  <div class="section-heading">
+    <h2>{copyBundle.aboutHeading}</h2>
+  </div>
+  <div class="about-summary">
+    <p>{copyBundle.aboutIntro}</p>
+  </div>
+  <div class="section-footer">
+    <a class="section-link" href={paths.about}>{copyBundle.aboutCta}</a>
+  </div>
+</section>

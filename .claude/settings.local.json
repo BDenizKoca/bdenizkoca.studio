@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp public/assets/scripts/main.js src/assets/scripts/main.js)",
+      "Bash(cp public/assets/scripts/scroll-fix.js src/assets/scripts/scroll-fix.js)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

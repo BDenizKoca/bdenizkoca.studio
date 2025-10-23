@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640">
+  <rect width="1280" height="640" fill="#222222"/>
+  <rect x="60" y="60" width="1160" height="520" fill="#608da8" opacity="0.2"/>
+  <text x="50%" y="52%" dominant-baseline="middle" text-anchor="middle" font-family="'Inter', sans-serif" font-size="72" fill="#F8F7F4">Project Archive</text>
+</svg>

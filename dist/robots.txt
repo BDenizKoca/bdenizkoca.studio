@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://bdenizkoca.studio/sitemap-index.xml

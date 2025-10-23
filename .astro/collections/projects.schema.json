@@ -1,0 +1,125 @@
+{
+  "$ref": "#/definitions/projects",
+  "definitions": {
+    "projects": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "date": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "string",
+              "format": "date"
+            },
+            {
+              "type": "integer",
+              "format": "unix-time"
+            }
+          ]
+        },
+        "updated": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "string",
+              "format": "date"
+            },
+            {
+              "type": "integer",
+              "format": "unix-time"
+            }
+          ]
+        },
+        "slug": {
+          "type": "string"
+        },
+        "cover_image": {
+          "type": "string"
+        },
+        "hover_image": {
+          "type": "string"
+        },
+        "hover_video": {
+          "type": "string"
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "slider_items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "image",
+                  "video"
+                ]
+              },
+              "src": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "src"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "projects"
+          ]
+        },
+        "lang": {
+          "type": "string",
+          "enum": [
+            "en",
+            "tr"
+          ],
+          "default": "en"
+        },
+        "order": {
+          "type": "number"
+        },
+        "show_on_homepage": {
+          "type": "boolean"
+        },
+        "meta_title": {
+          "type": "string"
+        },
+        "meta_description": {
+          "type": "string"
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "description",
+        "date"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

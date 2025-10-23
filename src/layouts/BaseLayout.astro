@@ -1,0 +1,157 @@
+---
+import '../assets/styles/main.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  lang?: 'en' | 'tr';
+  bodyClass?: string;
+  coverImage?: string;
+  altLangUrl?: string;
+  schemaType?: 'WebSite' | 'Person' | 'BlogPosting' | 'CreativeWork';
+  datePublished?: string;
+  dateModified?: string;
+}
+
+const {
+  title = 'Deniz Koca',
+  description = 'Minimalist Chaos in a digital workshop and notebook by Deniz Koca.',
+  lang = 'en',
+  bodyClass = '',
+  coverImage = '/assets/images/og-default.png',
+  altLangUrl: propAltLangUrl,
+  schemaType = 'WebSite',
+  datePublished,
+  dateModified
+} = Astro.props;
+
+const siteUrl = 'https://bdenizkoca.studio';
+const fullUrl = `${siteUrl}${Astro.url.pathname}`;
+const ogImageUrl = `${siteUrl}${coverImage}`;
+
+// Fallback for pages that don't have a direct translation
+const altLangUrl = propAltLangUrl || (lang === 'en' ? '/tr/' : '/');
+
+// JSON-LD Structured Data
+const baseSchema = {
+  "@context": "https://schema.org",
+  "@type": schemaType,
+  "name": title,
+  "description": description,
+  "url": fullUrl,
+  "image": ogImageUrl,
+  "inLanguage": lang
+};
+
+let schema;
+if (schemaType === 'Person') {
+  schema = {
+    ...baseSchema,
+    "jobTitle": "Designer & Developer",
+    "url": siteUrl,
+    "sameAs": [
+      "https://github.com/BDenizKoca"
+    ]
+  };
+} else if (schemaType === 'BlogPosting') {
+  schema = {
+    ...baseSchema,
+    "headline": title,
+    "datePublished": datePublished,
+    "dateModified": dateModified || datePublished,
+    "author": {
+      "@type": "Person",
+      "name": "Deniz Koca",
+      "url": siteUrl
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Deniz Koca"
+    }
+  };
+} else if (schemaType === 'CreativeWork') {
+  schema = {
+    ...baseSchema,
+    "author": {
+      "@type": "Person",
+      "name": "Deniz Koca",
+      "url": siteUrl
+    },
+    "creator": {
+      "@type": "Person",
+      "name": "Deniz Koca"
+    }
+  };
+} else {
+  schema = {
+    ...baseSchema,
+    "author": {
+      "@type": "Person",
+      "name": "Deniz Koca"
+    }
+  };
+}
+---
+
+<!DOCTYPE html>
+<html lang={lang} class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <meta name="theme-color" content="#608da8">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content={fullUrl}>
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:image" content={ogImageUrl}>
+  <meta property="og:locale" content={lang === 'tr' ? 'tr_TR' : 'en_US'}>
+  <meta property="og:locale:alternate" content={lang === 'tr' ? 'en_US' : 'tr_TR'}>
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content={fullUrl}>
+  <meta name="twitter:title" content={title}>
+  <meta name="twitter:description" content={description}>
+  <meta name="twitter:image" content={ogImageUrl}>
+  
+  <!-- Canonical and language alternates -->
+  <link rel="canonical" href={fullUrl}>
+  {lang === 'en' ? (
+    <>
+      <link rel="alternate" hreflang="tr" href={`${siteUrl}${altLangUrl}`}>
+      <link rel="alternate" hreflang="en" href={fullUrl}>
+      <link rel="alternate" hreflang="x-default" href={fullUrl}>
+    </>
+  ) : (
+    <>
+      <link rel="alternate" hreflang="en" href={`${siteUrl}${altLangUrl}`}>
+      <link rel="alternate" hreflang="tr" href={fullUrl}>
+      <link rel="alternate" hreflang="x-default" href={fullUrl}>
+    </>
+  )}
+  
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="/assets/images/icon.svg">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <script is:inline>document.documentElement.classList.remove('no-js');</script>
+  <script is:inline type="module" src="/registerSW.js"></script>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+</head>
+<body class={`site-body ${bodyClass}`}>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <slot name="header" />
+  <main id="main" class="site-main" tabindex="-1">
+    <slot />
+  </main>
+  <slot name="footer" />
+  <script>
+    import '../assets/scripts/main.js';
+    import '../assets/scripts/scroll-fix.js';
+  </script>
+</body>
+</html>

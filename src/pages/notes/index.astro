@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const notes = await getCollection('notes', ({ data }) => data.lang === 'en');
+
+// Sort notes by date (newest first)
+notes.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+function formatDate(date: Date): string {
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  }).format(date);
+}
+---
+
+<BaseLayout
+  title="Notes — Deniz Koca"
+  description="Thoughts, reflections, and notes on design, systems, and craft."
+  lang="en"
+  bodyClass="page-notes"
+>
+  <Header slot="header" lang="en" currentPath="/notes/" altLangUrl="/tr/notlar/" />
+
+  <div class="page-heading page-heading--standalone container">
+    <h1>Notes</h1>
+    <p class="page-intro">Thoughts, reflections, and notes on design, systems, and craft.</p>
+  </div>
+
+  <section class="notes-section container">
+    <div class="notes-index notes-index--hub">
+      {notes.map((note) => (
+        <article class="note-item">
+          <h2><a href={`/notes/${note.slug}/`}>{note.data.title}</a></h2>
+          <time datetime={note.data.date.toISOString()}>
+            {formatDate(note.data.date)}
+          </time>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <Footer slot="footer" lang="en" />
+</BaseLayout>

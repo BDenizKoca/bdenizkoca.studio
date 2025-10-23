@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word Break Test</title>
+  <style>
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      padding: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .test-container {
+      border: 2px solid #ccc;
+      padding: 2rem;
+      margin: 1rem 0;
+      width: 400px; /* Force narrow width to test wrapping */
+    }
+
+    h1 {
+      font-size: 2rem;
+      line-height: 1.2;
+      margin: 0 0 1rem 0;
+    }
+
+    .test1 h1 {
+      /* Browser default */
+    }
+
+    .test2 h1 {
+      overflow-wrap: break-word;
+      hyphens: auto;
+      -webkit-hyphens: auto;
+    }
+
+    .test3 h1 {
+      overflow-wrap: break-word;
+      hyphens: auto;
+      -webkit-hyphens: auto;
+      min-width: 0;
+    }
+
+    .test4 h1 {
+      word-break: keep-all;
+    }
+  </style>
+</head>
+<body>
+  <h2>Word Breaking Test - Turkish</h2>
+
+  <div class="test-container test1">
+    <p><strong>Test 1: Default (no CSS)</strong></p>
+    <h1>Doğal olarak meraklı biriyim; bir şeyler yaratmaktan ve hikayeleri keşfetmekten keyif alıyorum.</h1>
+  </div>
+
+  <div class="test-container test2">
+    <p><strong>Test 2: overflow-wrap + hyphens:auto</strong></p>
+    <h1>Doğal olarak meraklı biriyim; bir şeyler yaratmaktan ve hikayeleri keşfetmekten keyif alıyorum.</h1>
+  </div>
+
+  <div class="test-container test3">
+    <p><strong>Test 3: overflow-wrap + hyphens:auto + min-width:0</strong></p>
+    <h1>Doğal olarak meraklı biriyim; bir şeyler yaratmaktan ve hikayeleri keşfetmekten keyif alıyorum.</h1>
+  </div>
+
+  <div class="test-container test4">
+    <p><strong>Test 4: word-break: keep-all</strong></p>
+    <h1>Doğal olarak meraklı biriyim; bir şeyler yaratmaktan ve hikayeleri keşfetmekten keyif alıyorum.</h1>
+  </div>
+
+  <h3>What you should see:</h3>
+  <ul>
+    <li>Test 2 & 3: Words should break WITH hyphens (like "hika-yeleri")</li>
+    <li>Test 4: Words should NOT break mid-word (only break at spaces)</li>
+  </ul>
+
+  <p><strong>Current browser:</strong> <span id="browser"></span></p>
+  <p><strong>Width of test containers:</strong> 400px (narrow to force wrapping)</p>
+
+  <script>
+    document.getElementById('browser').textContent = navigator.userAgent;
+  </script>
+</body>
+</html>

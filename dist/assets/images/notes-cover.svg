@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640">
+  <rect width="1280" height="640" fill="#F8F7F4"/>
+  <rect x="60" y="60" width="1160" height="520" fill="#222222" opacity="0.1"/>
+  <text x="50%" y="52%" dominant-baseline="middle" text-anchor="middle" font-family="'Source Serif Pro', serif" font-size="72" fill="#222222">Notes Archive</text>
+</svg>

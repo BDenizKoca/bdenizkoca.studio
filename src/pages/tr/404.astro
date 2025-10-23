@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { copy } from '../../config/copy';
+
+const copyBundle = copy.tr;
+---
+
+<BaseLayout title={copyBundle.notFound.title} lang="tr" bodyClass="page-404">
+  <Header slot="header" lang="tr" currentPath="/tr/404/" />
+
+  <div class="container not-found-content">
+    <h1>{copyBundle.notFound.title}</h1>
+    <blockquote class="not-found-quote">
+      <p class="not-found-quote-text">"Altın olan her şey parlamaz,<br>Her gezgin yitirmemiştir yolunu"</p>
+      <cite>— J. R. R. Tolkien</cite>
+    </blockquote>
+    <p>Ama sen kaybolmuş gibisin.</p>
+    <p><a href="/tr/">{copyBundle.notFound.cta}</a></p>
+  </div>
+
+  <Footer slot="footer" lang="tr" />
+</BaseLayout>

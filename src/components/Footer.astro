@@ -1,0 +1,22 @@
+---
+import { siteConfig } from '../config/site';
+import { copy } from '../config/copy';
+
+interface Props {
+  lang?: 'en' | 'tr';
+}
+
+const { lang = 'en' } = Astro.props;
+const copyBundle = copy[lang];
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p set:html={copyBundle.footer.copyright} />
+    <p>
+      <a href={siteConfig.social.github}>GitHub</a> &bull; 
+      <a href={siteConfig.social.email}>Email</a>
+    </p>
+    <p class="footer-meta" set:html={copyBundle.footer.meta} />
+  </div>
+</footer>

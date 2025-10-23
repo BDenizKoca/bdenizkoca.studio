@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import HomePage from '../../components/HomePage.astro';
+import { getFeaturedContent, sortProjectsByOrderAndDate, sortByDateDesc } from '../../utils';
+
+const lang = 'tr';
+
+// Get featured content
+const featuredProjects = await getFeaturedContent('projects', lang);
+const featuredNotes = await getFeaturedContent('notes', lang);
+
+// Sort and get first items
+const tideflowProject = sortProjectsByOrderAndDate(featuredProjects)[0] || null;
+const tideflowNote = sortByDateDesc(featuredNotes)[0] || null;
+---
+
+<BaseLayout lang="tr" bodyClass="page-home">
+  <Header slot="header" lang="tr" currentPath="/tr/" />
+  <HomePage lang="tr" featuredProject={tideflowProject} featuredNote={tideflowNote} />
+  <Footer slot="footer" lang="tr" />
+</BaseLayout>

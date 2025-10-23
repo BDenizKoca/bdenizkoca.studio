@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { formatDate, getAltLangSlug } from '../../../utils';
+
+export const getStaticPaths = (async () => {
+  const allNotes = await getCollection('notes');
+  const trNotes = allNotes.filter(({ data }) => data.lang === 'tr');
+
+  return trNotes.map(note => ({
+    params: { slug: note.data.slug || note.slug.replace(/^tr\//, '') },
+    props: {
+      note,
+      altLangSlug: getAltLangSlug(allNotes, note.slug, 'tr')
+    }
+  }));
+}) satisfies GetStaticPaths;
+
+const { note, altLangSlug } = Astro.props;
+const { Content } = await note.render();
+
+// Get the alternate language entry to check for custom slug override
+const altNote = altLangSlug ? await getCollection('notes').then(all => all.find(n => n.slug === altLangSlug)) : null;
+const cleanAltSlug = altNote?.data.slug || altLangSlug?.replace(/^en\//, '');
+const altLangUrl = cleanAltSlug ? `/notes/${cleanAltSlug}/` : undefined;
+---
+
+<BaseLayout
+  title={note.data.meta_title || note.data.title}
+  description={note.data.meta_description || note.data.description}
+  lang="tr"
+  bodyClass="page-note"
+  altLangUrl={altLangUrl}
+  schemaType="BlogPosting"
+  datePublished={note.data.date.toISOString()}
+  dateModified={note.data.updated?.toISOString()}
+>
+  <Header slot="header" lang="tr" currentPath={Astro.url.pathname} altLangUrl={altLangUrl} />
+  
+  <article class="note-article container">
+    <header class="note-header">
+      <h1>{note.data.title}</h1>
+      <time datetime={note.data.date.toISOString()}>
+        {formatDate(note.data.date, 'tr')}
+      </time>
+    </header>
+    <div class="note-content prose">
+      <Content />
+    </div>
+  </article>
+
+  <Footer slot="footer" lang="tr" />
+</BaseLayout>

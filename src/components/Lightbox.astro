@@ -1,0 +1,57 @@
+---
+// This component does not require any props.
+---
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" aria-label="Close lightbox">×</button>
+  <div class="lightbox-content">
+    <img src="" alt="" id="lightbox-image" loading="lazy" decoding="async" />
+  </div>
+</div>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxClose = document.querySelector('.lightbox-close');
+    
+    function closeLightbox() {
+      if (lightbox) {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    if (lightbox && lightboxImage && lightboxClose) {
+      const lightboxTriggers = document.querySelectorAll('.lightbox-trigger');
+
+      lightboxTriggers.forEach(trigger => {
+        trigger.addEventListener('click', () => {
+          const src = trigger.getAttribute('data-lightbox-src');
+          const img = trigger.querySelector('img');
+          const lightboxImg = lightboxImage as HTMLImageElement;
+          if (lightboxImg && src) {
+            lightboxImg.src = src;
+            lightboxImg.alt = (img as HTMLImageElement)?.alt || '';
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          }
+        });
+      });
+
+      lightboxClose.addEventListener('click', closeLightbox);
+
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+          closeLightbox();
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+          closeLightbox();
+        }
+      });
+    }
+  });
+</script>

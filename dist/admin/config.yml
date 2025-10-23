@@ -1,0 +1,122 @@
+backend:
+  name: git-gateway
+  branch: main
+media_folder: "src/assets/uploads"
+public_folder: "/assets/uploads"
+site_url: "https://bdenizkoca.studio"
+display_url: "https://bdenizkoca.studio"
+locale: en
+slug:
+  encoding: "unicode"
+  clean_accents: true
+  sanitize_replacement: "-"
+collections:
+  - name: "projects_en"
+    label: "Projects (EN)"
+    folder: "src/content/projects"
+    create: true
+    slug: "{{slug}}"
+    preview_path: "projects/{{slug}}/"
+    filter: { field: "lang", value: "en" }
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text", hint: "Short blurb used on the homepage and archive." }
+      - { label: "Publish Date", name: "date", widget: "datetime", time: false }
+      - { label: "Updated Date", name: "updated", widget: "datetime", time: false, required: false }
+      - { label: "Order", name: "order", widget: "number", default: 99, hint: "Lower numbers appear first in featured grids." }
+      - { label: "Cover Image", name: "cover_image", widget: "string", hint: "URL to cover image" }
+      - { label: "Hover Video", name: "hover_video", widget: "string", required: false, hint: "URL to hover video" }
+      - { label: "Thumbnail Image", name: "thumbnail", widget: "string", required: false }
+      - { label: "Showcase on Homepage", name: "show_on_homepage", widget: "boolean", default: false }
+      - { label: "Meta Title", name: "meta_title", widget: "string", required: false }
+      - { label: "Meta Description", name: "meta_description", widget: "text", required: false, hint: "Used for SEO and social previews." }
+      - { label: "Tags", name: "tags", widget: "list", default: ["projects"] }
+      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Language", name: "lang", widget: "hidden", default: "en" }
+  - name: "projects_tr"
+    label: "Projects (TR)"
+    folder: "src/content/projects"
+    create: true
+    slug: "{{slug}}-tr"
+    preview_path: "tr/projeler/{{fields.slug}}/"
+    filter: { field: "lang", value: "tr" }
+    fields:
+      - { label: "Başlık", name: "title", widget: "string" }
+      - { label: "Açıklama", name: "description", widget: "text" }
+      - { label: "Yayın Tarihi", name: "date", widget: "datetime", time: false }
+      - { label: "Güncellenme Tarihi", name: "updated", widget: "datetime", time: false, required: false }
+      - { label: "URL Slug (Temiz URL için)", name: "slug", widget: "string", required: false, hint: "İngilizce versiyonla aynı slug kullanın. Örnek: 'tideflow'" }
+      - { label: "Sıra", name: "order", widget: "number", default: 99 }
+      - { label: "Kapak Görseli", name: "cover_image", widget: "string", hint: "Görsel URL'si" }
+      - { label: "Hover Videosu", name: "hover_video", widget: "string", required: false, hint: "Video URL'si" }
+      - { label: "Küçük Resim", name: "thumbnail", widget: "string", required: false }
+      - { label: "Anasayfada Göster", name: "show_on_homepage", widget: "boolean", default: false }
+      - { label: "Meta Başlık", name: "meta_title", widget: "string", required: false }
+      - { label: "Meta Açıklama", name: "meta_description", widget: "text", required: false }
+      - { label: "Etiketler", name: "tags", widget: "list", default: ["projects"] }
+      - { label: "Gövde", name: "body", widget: "markdown" }
+      - { label: "Dil", name: "lang", widget: "hidden", default: "tr" }
+  - name: "notes_en"
+    label: "Notes (EN)"
+    folder: "src/content/notes"
+    create: true
+    slug: "{{slug}}"
+    preview_path: "notes/{{slug}}/"
+    filter: { field: "lang", value: "en" }
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Publish Date", name: "date", widget: "datetime", time: false }
+      - { label: "Updated Date", name: "updated", widget: "datetime", time: false, required: false }
+      - { label: "Showcase on Homepage", name: "show_on_homepage", widget: "boolean", default: false }
+      - { label: "Meta Title", name: "meta_title", widget: "string", required: false }
+      - { label: "Meta Description", name: "meta_description", widget: "text", required: false }
+      - { label: "Tags", name: "tags", widget: "list", default: ["notes"] }
+      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Language", name: "lang", widget: "hidden", default: "en" }
+  - name: "notes_tr"
+    label: "Notes (TR)"
+    folder: "src/content/notes"
+    create: true
+    slug: "{{slug}}-tr"
+    preview_path: "tr/notlar/{{fields.slug}}/"
+    filter: { field: "lang", value: "tr" }
+    fields:
+      - { label: "Başlık", name: "title", widget: "string" }
+      - { label: "Açıklama", name: "description", widget: "text" }
+      - { label: "Yayın Tarihi", name: "date", widget: "datetime", time: false }
+      - { label: "Güncellenme Tarihi", name: "updated", widget: "datetime", time: false, required: false }
+      - { label: "URL Slug (Temiz URL için)", name: "slug", widget: "string", required: false, hint: "İngilizce versiyonla aynı slug kullanın. Örnek: 'creating-tideflow'" }
+      - { label: "Anasayfada Göster", name: "show_on_homepage", widget: "boolean", default: false }
+      - { label: "Meta Başlık", name: "meta_title", widget: "string", required: false }
+      - { label: "Meta Açıklama", name: "meta_description", widget: "text", required: false }
+      - { label: "Etiketler", name: "tags", widget: "list", default: ["notes"] }
+      - { label: "Gövde", name: "body", widget: "markdown" }
+      - { label: "Dil", name: "lang", widget: "hidden", default: "tr" }
+  - name: "pages"
+    label: "Pages"
+    files:
+      - label: "About (EN)"
+        name: "about_en"
+        file: "src/me/index.md"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Summary", name: "summary", widget: "string" }
+          - { label: "Cover Image", name: "cover_image", widget: "image" }
+          - { label: "Meta Title", name: "meta_title", widget: "string" }
+          - { label: "Meta Description", name: "meta_description", widget: "text" }
+          - { label: "Body", name: "body", widget: "markdown" }
+          - { label: "Language", name: "lang", widget: "hidden", default: "en" }
+          - { label: "Body Class", name: "body_class", widget: "hidden", default: "page-longform" }
+      - label: "About (TR)"
+        name: "about_tr"
+        file: "src/tr/ben/index.md"
+        fields:
+          - { label: "Başlık", name: "title", widget: "string" }
+          - { label: "Özet", name: "summary", widget: "string" }
+          - { label: "Kapak Görseli", name: "cover_image", widget: "image" }
+          - { label: "Meta Başlık", name: "meta_title", widget: "string" }
+          - { label: "Meta Açıklama", name: "meta_description", widget: "text" }
+          - { label: "Gövde", name: "body", widget: "markdown" }
+          - { label: "Dil", name: "lang", widget: "hidden", default: "tr" }
+          - { label: "Body Class", name: "body_class", widget: "hidden", default: "page-longform" }
