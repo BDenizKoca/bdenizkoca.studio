@@ -35,7 +35,7 @@ function formatDate(date: Date): string {
     <div class="notes-index notes-index--hub">
       {notes.map((note) => (
         <article class="note-item">
-          <h2><a href={`/notes/${note.slug}/`}>{note.data.title}</a></h2>
+          <h2><a href={`/notes/${note.slug.replace('en/', '')}/`}>{note.data.title}</a></h2>
           <time datetime={note.data.date.toISOString()}>
             {formatDate(note.data.date)}
           </time>
