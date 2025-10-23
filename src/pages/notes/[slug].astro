@@ -41,11 +41,35 @@ const altLangUrl = cleanAltSlug ? `/tr/notlar/${cleanAltSlug}/` : undefined;
   <Header slot="header" lang="en" currentPath={Astro.url.pathname} altLangUrl={altLangUrl} />
   
   <article class="note-article container">
-    <header class="article-hero">
-      <h1>{note.data.title}</h1>
-      <time datetime={note.data.date.toISOString()}>
-        {formatDate(note.data.date)}
-      </time>
+    <header class="article-hero article-hero--simple">
+      <div class="article-hero__inner">
+        <div class="article-hero__primary">
+          <h1>{note.data.title}</h1>
+          {note.data.description && (
+            <p class="article-hero__intro">{note.data.description}</p>
+          )}
+        </div>
+        <dl class="article-hero__meta">
+          <div>
+            <dt>Published</dt>
+            <dd>
+              <time datetime={note.data.date.toISOString()}>
+                {formatDate(note.data.date)}
+              </time>
+            </dd>
+          </div>
+          {note.data.updated && (
+            <div>
+              <dt>Last Updated</dt>
+              <dd>
+                <time datetime={note.data.updated.toISOString()}>
+                  {formatDate(note.data.updated)}
+                </time>
+              </dd>
+            </div>
+          )}
+        </dl>
+      </div>
     </header>
     <div class="note-content prose">
       <Content />

@@ -25,17 +25,20 @@ projects.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
   <section class="collection-section container">
     <div class="collection-grid collection-grid--projects">
-      {projects.map((project) => (
-        <article class="project-card project-card--collection">
-          <a href={`/projects/${project.slug}/`} class="project-card__media">
-            <img src={project.data.cover_image} alt={project.data.title} loading="lazy" decoding="async" />
-          </a>
-          <div class="project-card__body">
-            <h2><a href={`/projects/${project.slug.replace('en/', '')}/`}>{project.data.title}</a></h2>
-            <p>{project.data.description}</p>
-          </div>
-        </article>
-      ))}
+      {projects.map((project) => {
+        const slug = project.data.slug ?? project.slug.replace(/^en\//, '');
+        return (
+          <article class="project-card project-card--collection">
+            <a href={`/projects/${slug}/`} class="project-card__media">
+              <img src={project.data.cover_image} alt={project.data.title} loading="lazy" decoding="async" />
+            </a>
+            <div class="project-card__body">
+              <h2><a href={`/projects/${slug}/`}>{project.data.title}</a></h2>
+              <p>{project.data.description}</p>
+            </div>
+          </article>
+        );
+      })}
     </div>
   </section>
 

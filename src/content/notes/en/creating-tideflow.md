@@ -6,11 +6,11 @@ lang: en
 show_on_homepage: true
 ---
 
-This all started 4-5 years back when I first started noticing more and more markdowns files popping up in my workflow. I was and still am a naturally very curious person. Which was why I was busy with academia, learning latin, learning coding and bunchmore things that would require me to write some things down. Skip forward 1-2 years and I found myself defaulting to this workflow.
+This all started 4-5 years back when I first started noticing more and more markdown files popping up in my workflow. I was and still am a naturally very curious person. Which was why I was busy with academia, learning Latin, learning coding and bunch more things that would require me to write some things down. Skip forward 1-2 years and I found myself defaulting to this workflow.
 
--Write down whatever you want to write without format, as plain text
--Give an reference doc with the layout and format you want to an AI 
--Then ask the AI to reformat the text and fix the layout without changing the content
+- Write down whatever you want to write without format, as plain text.
+- Give a reference doc with the layout and format you want to an AI.
+- Then ask the AI to reformat the text and fix the layout without changing the content.
 
 While this was hit and miss when LLMs were first start becoming popular but the results got progressively better as LLMs got better at their job. 
 
@@ -22,13 +22,13 @@ Writing output has been greatly increased and I was productive more then ever (a
 
 In the world of markdown to pdf editors, the general stragety (and its a good stragety) seems to be to convert the markdown content into a stylised HTML page and then utilize the print feature to save it as a PDF. Nothing is wrong with this approach and it gives out a great approximation for what you are going to get. But it is an approximation after all and it is basicly impossible to exactly see what you are going to get until you open the exported PDF. While this style of appromixete preview and rendering could work for others. I get obsessed about little details of my work, like preciesly where one page ends and one page starts. Even if I could insert manual page breaks into the markdown text, the HTML previews wouldn't render that until it is exported. And did you know that good PDF editors doesnt exist? Like literarlly, even if I was okay with adding an step and editing the PDFs myself, I couldn't find a good editor to edit PDFs.
 
-So this grinded my workflow to a halt. Being a bit of a perfectioniost will do that to you. When I sit down to write, I would like to only focus on the writing part itself. Ideally, I would have some preset themes to handle the layout and style part. And I couldn't figure out how to set up this ideal workflow with markdown files. And that's when I realised that If I wanted an app suitable for my workflow, my only (logical) option was to build a new kind of markdown editor from strach. I had a very clear vision, I wanted to do all my writing and styling without leaving the same app window and end up with an md file for myself and stylised PDF ready for sharing/publishing. With that vision I skecthed a quick app;
+So this grinded my workflow to a halt. Being a bit of a perfectionist will do that to you. When I sit down to write, I would like to only focus on the writing part itself. Ideally, I would have some preset themes to handle the layout and style part. And I couldn't figure out how to set up this ideal workflow with markdown files. And that's when I realised that if I wanted an app suitable for my workflow, my only (logical) option was to build a new kind of markdown editor from scratch. I had a very clear vision: I wanted to do all my writing and styling without leaving the same app window and end up with an MD file for myself and a stylised PDF ready for sharing/publishing. With that vision I sketched a quick app:
 
--A simple markdown editor with user friendly toolbar on the left
--Accurately rendered and paginated PDF preview of the exact render you are going to get on the right
--An easy to use design menu with premade themes and custom theme options.
+- A simple markdown editor with a user-friendly toolbar on the left.
+- Accurately rendered and paginated PDF preview of the exact render you are going to get on the right.
+- An easy-to-use design menu with pre-made themes and custom theme options.
 
-So I wrote a basic design document outlying this idea and saved it in markdown. Then I did what I do best and fell into numerous rabbit holes, some are related some are not. Short version is that, I settled on typst which is a blazing fast converter. It uses its own file system (.typ or something) and converts it in to PDF in blazing fast speeds. Much to may dismay, Typst's own editor also doesn't come with true pagianation and relies on the same HTML to print pipeline. But that incredibly fast rendering time gave me an idea. If the conversion is nearly instantaneous, why bother with an approximation at all?
+So I wrote a basic design document outlining this idea and saved it in markdown. Then I did what I do best and fell into numerous rabbit holes, some are related some are not. Short version is that, I settled on Typst which is a blazing fast converter. It uses its own file system (.typ or something) and converts it in to PDF in blazing fast speeds. Much to my dismay, Typst's own editor also doesn't come with true pagination and relies on the same HTML to print pipeline. But that incredibly fast rendering time gave me an idea. If the conversion is nearly instantaneous, why bother with an approximation at all?
 
 ## Everything is a copy of a copy of a copy...
 
