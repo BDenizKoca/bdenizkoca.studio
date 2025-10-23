@@ -1186,7 +1186,8 @@ section {
 }
 
 .article-hero--simple .article-hero__inner {
-  max-width: min(72ch, 100%);
+  max-width: none;
+  width: 100%;
 }
 
 .article-body {
