@@ -586,6 +586,13 @@ ul, ol {
   .site-navigation ul { font-size: 0.82rem; gap: 0.6rem; }
   .language-toggle { font-size: 0.8rem; }
 
+  /* Always show header on mobile */
+  .site-header {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
   html, body {
     max-width: 100vw !important;
     overflow-x: hidden !important;
