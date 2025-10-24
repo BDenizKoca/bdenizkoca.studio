@@ -1684,7 +1684,7 @@ section {
   animation: subtle-float 3s ease-in-out infinite;
 }
 
-.mobile-interactive-hint .intro-led__char:nth-child(7n + 3) {
+.mobile-interactive-hint .intro-lede__char:nth-child(7n + 3) {
   animation: subtle-float 3s ease-in-out infinite;
   animation-delay: 0.5s;
 }
