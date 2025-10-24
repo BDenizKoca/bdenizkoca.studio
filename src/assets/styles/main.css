@@ -586,11 +586,21 @@ ul, ol {
   .site-navigation ul { font-size: 0.82rem; gap: 0.6rem; }
   .language-toggle { font-size: 0.8rem; }
 
-  /* Always show header on mobile */
+  /* Always show and fix header on mobile */
   .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
+  }
+
+  /* Add padding to body to account for fixed header */
+  .site-body {
+    padding-top: 60px;
   }
 
   html, body {
