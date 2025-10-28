@@ -64,6 +64,6 @@ tags: ["Masaüstü Uygulaması", "Markdown", "PDF", "Açık Kaynak"]
       <li><strong>Toplu Dışa Aktarım:</strong> Bir dizin dolusu Markdown belgesini tek seferde PDF'e dönüştürün.</li>
       <li><strong>Ayar Profillerini İçe/Dışa Aktarma:</strong> Oluşturduğunuz özel temaları ve ayarları dışa aktararak paylaşın veya farklı cihazlarda kullanın.</li>
     </ul>
-    <a href="https://payhip.com/b/wVBeS" class="button" target="_blank" rel="noopener noreferrer">Tideflow Pro'yu $10'a Satın Al</a>
+    <a href="https://payhip.com/b/TmIMF" class="button" target="_blank" rel="noopener noreferrer">Tideflow Pro'yu $10'a Satın Al</a>
   </div>
 </div>

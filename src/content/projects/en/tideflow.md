@@ -63,6 +63,6 @@ tags: ["Desktop App", "Markdown", "PDF", "Open Source"]
       <li><strong>Batch Export:</strong> Convert an entire folder of Markdown files to PDF at once.</li>
       <li><strong>Import/Export Presets:</strong> Bring your custom themes anywhere, or share them with friends.</li>
     </ul>
-    <a href="https://payhip.com/b/wVBeS" class="button" target="_blank" rel="noopener noreferrer">Buy Tideflow Pro for $10</a>
+    <a href="https://payhip.com/b/TmIMF" class="button" target="_blank" rel="noopener noreferrer">Buy Tideflow Pro for $10</a>
   </div>
 </div>
