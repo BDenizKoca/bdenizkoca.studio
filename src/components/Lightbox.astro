@@ -10,48 +10,65 @@
 </div>
 
 <script>
-  document.addEventListener('astro:page-load', () => {
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImage = document.getElementById('lightbox-image');
-    const lightboxClose = document.querySelector('.lightbox-close');
-    
+  // Use delegated click handling so triggers are detected reliably even
+  // if components initialize in different orders or elements are re-rendered.
+  (function setupLightbox() {
+    function openLightbox(src, alt) {
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImage = document.getElementById('lightbox-image');
+      if (!lightbox || !lightboxImage) return;
+      const imgEl = lightboxImage as HTMLImageElement;
+      imgEl.src = src;
+      imgEl.alt = alt || '';
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
     function closeLightbox() {
-      if (lightbox) {
-        lightbox.classList.remove('active');
-        document.body.style.overflow = '';
+      const lightbox = document.getElementById('lightbox');
+      if (!lightbox) return;
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Click delegation: handle clicks on any element matching .lightbox-trigger
+    document.addEventListener('click', (e) => {
+      const trigger = (e.target as Element).closest?.('.lightbox-trigger') as HTMLElement | null;
+      if (trigger) {
+        const src = trigger.getAttribute('data-lightbox-src');
+        const img = trigger.querySelector('img');
+        if (src) {
+          openLightbox(src, (img as HTMLImageElement)?.alt || '');
+          e.preventDefault();
+          e.stopPropagation();
+        }
       }
-    }
+    });
 
-    if (lightbox && lightboxImage && lightboxClose) {
-      const lightboxTriggers = document.querySelectorAll('.lightbox-trigger');
+    // Close button
+    document.addEventListener('click', (e) => {
+      const closeBtn = (e.target as Element).closest?.('.lightbox-close') as HTMLElement | null;
+      if (closeBtn) {
+        e.preventDefault();
+        closeLightbox();
+      }
+    });
 
-      lightboxTriggers.forEach(trigger => {
-        trigger.addEventListener('click', () => {
-          const src = trigger.getAttribute('data-lightbox-src');
-          const img = trigger.querySelector('img');
-          const lightboxImg = lightboxImage as HTMLImageElement;
-          if (lightboxImg && src) {
-            lightboxImg.src = src;
-            lightboxImg.alt = (img as HTMLImageElement)?.alt || '';
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
-          }
-        });
-      });
+    // Click outside image to close
+    document.addEventListener('click', (e) => {
+      const lightbox = document.getElementById('lightbox');
+      if (!lightbox) return;
+      if (lightbox.classList.contains('active') && e.target === lightbox) {
+        closeLightbox();
+      }
+    });
 
-      lightboxClose.addEventListener('click', closeLightbox);
+    // Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
 
-      lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) {
-          closeLightbox();
-        }
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-          closeLightbox();
-        }
-      });
-    }
-  });
+    // Also listen for astro:page-load if present
+    document.addEventListener('astro:page-load', () => {/* no-op; delegation covers it */});
+  })();
 </script>

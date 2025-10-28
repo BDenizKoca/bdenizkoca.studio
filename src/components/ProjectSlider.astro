@@ -50,49 +50,67 @@ if (!sliderItems || sliderItems.length === 0) {
 </div>
 
 <script>
-  document.addEventListener('astro:page-load', () => {
-    const sliders = document.querySelectorAll('.project-slider');
-    sliders.forEach(slider => {
-      const items = slider.querySelectorAll('.slider-item');
-      if (items.length === 0) return;
+  (function setupProjectSliders() {
+    function init() {
+      const sliders = document.querySelectorAll('.project-slider');
+      sliders.forEach(slider => {
+        // Avoid double-initialization
+        if (slider.dataset.sliderInit === '1') return;
+        slider.dataset.sliderInit = '1';
 
-      const dots = slider.querySelectorAll('.slider-dot');
-      const prevBtn = slider.querySelector('.slider-prev');
-      const nextBtn = slider.querySelector('.slider-next');
-      let currentSlide = 0;
+        const items = slider.querySelectorAll('.slider-item');
+        if (items.length === 0) return;
 
-      function goToSlide(index: number) {
-        items.forEach(item => item.classList.remove('active'));
-        dots.forEach(dot => dot.classList.remove('active'));
+        const dots = slider.querySelectorAll('.slider-dot');
+        const prevBtn = slider.querySelector('.slider-prev');
+        const nextBtn = slider.querySelector('.slider-next');
+        let currentSlide = 0;
 
-        items[index].classList.add('active');
-        if (dots[index]) dots[index].classList.add('active');
+        function goToSlide(index) {
+          items.forEach(item => item.classList.remove('active'));
+          dots.forEach(dot => dot.classList.remove('active'));
 
-        currentSlide = index;
-      }
+          const idx = Math.max(0, Math.min(index, items.length - 1));
+          items[idx].classList.add('active');
+          if (dots[idx]) dots[idx].classList.add('active');
 
-      function nextSlide() {
-        const next = (currentSlide + 1) % items.length;
-        goToSlide(next);
-      }
+          currentSlide = idx;
+        }
 
-      function prevSlide() {
-        const prev = (currentSlide - 1 + items.length) % items.length;
-        goToSlide(prev);
-      }
+        function nextSlide() {
+          const next = (currentSlide + 1) % items.length;
+          goToSlide(next);
+        }
 
-      if (prevBtn) prevBtn.addEventListener('click', prevSlide);
-      if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+        function prevSlide() {
+          const prev = (currentSlide - 1 + items.length) % items.length;
+          goToSlide(prev);
+        }
 
-      dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => goToSlide(index));
+        // Use event delegation where helpful and ensure handlers are attached
+        if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); prevSlide(); });
+        if (nextBtn) nextBtn.addEventListener('click', (e) => { e.stopPropagation(); nextSlide(); });
+
+        dots.forEach((dot, index) => {
+          dot.addEventListener('click', (e) => { e.stopPropagation(); goToSlide(index); });
+        });
+
+        slider.addEventListener('keydown', (e) => {
+          const key = e.key;
+          if (key === 'ArrowLeft') prevSlide();
+          if (key === 'ArrowRight') nextSlide();
+        });
       });
+    }
 
-      slider.addEventListener('keydown', (e) => {
-        const key = (e as KeyboardEvent).key;
-        if (key === 'ArrowLeft') prevSlide();
-        if (key === 'ArrowRight') nextSlide();
-      });
-    });
-  });
+    // Init on both Astro client event and standard DOMContentLoaded as a fallback
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+
+    // Astro-specific event (if present) — safe to call init again because we guard with dataset
+    document.addEventListener('astro:page-load', init);
+  })();
 </script>
