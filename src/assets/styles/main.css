@@ -1699,6 +1699,10 @@ section {
   .notes-index .note-item {
     grid-template-columns: 1fr;
   }
+
+  .button-group {
+    justify-content: center;
+  }
 }
 
 @media (min-width: 960px) {
