@@ -59,11 +59,17 @@ console.log('Final alt lang URL:', altLangUrl);
       <div class="project-header-content">
         <h1>{project.data.title}</h1>
         <div class="project-date-badge">
-          <span class="badge-label">Published:</span> {formatDateShort(project.data.date)}
+          <span class="date-pair">
+            <span class="badge-label">Published:</span>
+            <span class="date-value">{formatDateShort(project.data.date)}</span>
+          </span>
           {project.data.updated && (
             <>
               <span class="badge-separator">·</span>
-              <span class="badge-label">Last Edited:</span> {formatDateShort(project.data.updated)}
+              <span class="date-pair">
+                <span class="badge-label">Last Edited:</span>
+                <span class="date-value">{formatDateShort(project.data.updated)}</span>
+              </span>
             </>
           )}
         </div>

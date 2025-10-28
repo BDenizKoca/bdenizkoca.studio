@@ -57,6 +57,34 @@
   max-width: 100%;
 }
 
+/* Date pair layout: group label + value so we can stack on mobile */
+.project-date-badge .date-pair {
+  display: inline-flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+/* On small screens show each date pair on its own line */
+@media (max-width: 640px) {
+  .project-date-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    padding: 0.5rem;
+  }
+
+  .project-date-badge .badge-separator {
+    display: none;
+  }
+
+  .project-date-badge .date-pair {
+    display: flex;
+    gap: 0.5rem;
+    align-items: baseline;
+  }
+}
+
 .badge-label {
   font-weight: 500;
   white-space: nowrap;

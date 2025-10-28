@@ -47,11 +47,17 @@ const altLangUrl = cleanAltSlug ? `/projects/${cleanAltSlug}/` : undefined;
       <div class="project-header-content">
         <h1>{project.data.title}</h1>
         <div class="project-date-badge">
-          <span class="badge-label">Yayınlandı:</span> {formatDateShort(project.data.date)}
+          <span class="date-pair">
+            <span class="badge-label">Yayınlandı:</span>
+            <span class="date-value">{formatDateShort(project.data.date)}</span>
+          </span>
           {project.data.updated && (
             <>
               <span class="badge-separator">·</span>
-              <span class="badge-label">Son Düzenleme:</span> {formatDateShort(project.data.updated)}
+              <span class="date-pair">
+                <span class="badge-label">Son Düzenleme:</span>
+                <span class="date-value">{formatDateShort(project.data.updated)}</span>
+              </span>
             </>
           )}
         </div>
