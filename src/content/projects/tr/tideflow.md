@@ -1,8 +1,8 @@
 ---
 title: "Tideflow - Yalın Bir Markdown-PDF Dönüştürücüsü"
 description: "Odağınızı korumanıza yardımcı olmak üzere tasarlanmış, çevrimdışı çalışan, hızlı bir Markdown-PDF masaüstü uygulaması."
-date: 2023-10-26T00:00:00.000Z
-updated: 2025-10-20T00:00:00.000Z
+date: 2025-09-15T00:00:00.000Z
+updated: 2025-10-28T00:00:00.000Z
 slug: "tideflow"
 order: 1
 cover_image: https://file.garden/aLboplo8eB2dIZKp/GitHub/TideFlow/tideflow-hero.png
